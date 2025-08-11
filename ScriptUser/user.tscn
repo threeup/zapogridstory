@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnkesp6l50l4b"]
+
+[ext_resource type="Script" uid="uid://djlvx84n4dk0h" path="res://ScriptUser/User.gd" id="1_j77g1"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_j77g1"]
+
+[node name="User" type="Node3D"]
+script = ExtResource("1_j77g1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_j77g1")

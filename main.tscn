@@ -1,0 +1,75 @@
+[gd_scene load_steps=16 format=3 uid="uid://chh5p7epf6ix6"]
+
+[ext_resource type="Script" uid="uid://yfvbsjm7y6ay" path="res://Main.gd" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://cxspkygaocv10" path="res://luc-debenon-rockcliffface-06.jpg" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cnkesp6l50l4b" path="res://ScriptUser/user.tscn" id="2_dg77c"]
+[ext_resource type="PackedScene" uid="uid://bovcnn5pw43te" path="res://area.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://662k3g5aoe8" path="res://ScriptPawn/pawn.tscn" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://bdmsxiajq8id7" path="res://tile.tscn" id="4_7mycd"]
+[ext_resource type="Script" uid="uid://dr71cq2a3xwm5" path="res://CameraTarget.gd" id="6_272bh"]
+[ext_resource type="Script" uid="uid://dljdtllu0u87g" path="res://ScriptLabels/LabelQuadrant.gd" id="7_kek77"]
+[ext_resource type="Script" uid="uid://b0uds0pgn3m0l" path="res://ScriptLabels/LabelGameProgress.gd" id="8_4c57u"]
+[ext_resource type="Script" uid="uid://biyomawablln" path="res://GridNode.gd" id="10_4c57u"]
+[ext_resource type="Script" uid="uid://b6ypsv7vfjm1g" path="res://ScriptLabels/LabelStateMachines.gd" id="10_efxa6"]
+[ext_resource type="Script" uid="uid://de4c4y240p7je" path="res://ScriptBoss/Boss.gd" id="12_dg77c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_texture = ExtResource("1_ig7tw")
+uv1_scale = Vector3(4.005, 4.005, 4.005)
+
+[sub_resource type="QuadMesh" id="QuadMesh_1bvp3"]
+material = SubResource("StandardMaterial3D_h2yge")
+
+[sub_resource type="SphereMesh" id="SphereMesh_kek77"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_0xm2m")
+user_scene = ExtResource("2_dg77c")
+pawn_scene = ExtResource("2_lquwl")
+area_scene = ExtResource("2_h2yge")
+tile_scene = ExtResource("4_7mycd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 1, 0, -100, -4.37114e-08, 0, -10, 0)
+mesh = SubResource("QuadMesh_1bvp3")
+
+[node name="Field" type="Node3D" parent="."]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="CameraTarget" type="Node3D" parent="."]
+script = ExtResource("6_272bh")
+
+[node name="Camera3D" type="Camera3D" parent="CameraTarget"]
+transform = Transform3D(1, 0, 0, 0, 0.626835, 0.779152, 0, -0.779152, 0.626835, 0, 7, 7)
+
+[node name="LabelQuadrant" type="Label3D" parent="CameraTarget/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.267, 1.2, -2)
+text = "-
+"
+script = ExtResource("7_kek77")
+
+[node name="LabelGameProgress" type="Label3D" parent="CameraTarget/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 1.4, -2)
+text = "-"
+script = ExtResource("8_4c57u")
+
+[node name="LabelStateMachines" type="Label3D" parent="CameraTarget/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.67375, 2.38419e-07, -2)
+text = "-"
+horizontal_alignment = 0
+script = ExtResource("10_efxa6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraTarget/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.974098, -0.226124, 0, 0.226124, 0.974098, 0, -0.509809, 1.66245)
+
+[node name="marker" type="MeshInstance3D" parent="CameraTarget"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+mesh = SubResource("SphereMesh_kek77")
+
+[node name="GridNode" type="Node3D" parent="."]
+script = ExtResource("10_4c57u")
+
+[node name="Boss" type="Node3D" parent="."]
+script = ExtResource("12_dg77c")
+userCount = 2
